@@ -21,7 +21,6 @@ xml_tree.SubElement(channel_element, 'itunes:image', {'href': link_prefix + yaml
 xml_tree.SubElement(channel_element, 'language').text = yaml_data['language']
 xml_tree.SubElement(channel_element, 'link').text = link_prefix
 
-# Check if 'items' exists in yaml_data, if not, use an empty list
 items = yaml_data.get('items', [])
 
 for item in items:
