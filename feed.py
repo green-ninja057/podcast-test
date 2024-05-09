@@ -21,9 +21,9 @@ xml_tree.SubElement(channel_element, 'itunes:image', {'href': link_prefix + yaml
 xml_tree.SubElement(channel_element, 'language').text = yaml_data['language']
 xml_tree.SubElement(channel_element, 'link').text = link_prefix
 
-items = yaml_data.get('items', [])
+xml_tree.SubElement(channel_element, 'itunes:category', {'text': yaml_data['category']})
 
-for item in items:
+for item in yaml_data['item']:
     item_element = xml_tree.SubElement(channel_element, 'item')
     xml_tree.SubElement(item_element, 'title').text = item['title']
     xml_tree.SubElement(item_element, 'itunes:author').text = item['author']
@@ -36,8 +36,6 @@ for item in items:
         'type': 'audio/mpeg',
         'length': item['length']
     })
-
-xml_tree.SubElement(channel_element, 'itunes:category', {'text': yaml_data['category']})
 
 output_tree = xml_tree.ElementTree(rss_element)
 output_tree.write('podcast.xml', encoding='UTF-8', xml_declaration=True)
